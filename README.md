@@ -24,6 +24,7 @@ This project is developed and maintained by the [Resources team][team].
     * [Microchip](#microchip)
     * [Nordic](#nordic)
     * [NXP](#nxp)
+    * [Raspberry Pi Silicon](#raspberry-pi-silicon)
     * [SiFive](#sifive)
     * [Silicon Labs](#silicon-labs)
     * [STMicroelectronics](#stmicroelectronics)
@@ -31,11 +32,13 @@ This project is developed and maintained by the [Resources team][team].
     * [MSP430](#msp430)
     * [Ambiq Micro](#ambiq-micro)
     * [XMC](#xmc)
+    * [Vorago](#vorago)
 * [HAL implementation crates](#hal-implementation-crates)
     * [OS](#os)
     * [GigaDevice](#gigadevice-1)
     * [Nordic](#nordic-1)
     * [NXP](#nxp-1)
+    * [Raspberry Pi Silicon](#raspberry-pi-silicon-1)
     * [SiFive](#sifive-1)
     * [STMicroelectronics](#stmicroelectronics-1)
     * [Texas Instruments](#texas-instruments-1)
@@ -43,6 +46,7 @@ This project is developed and maintained by the [Resources team][team].
     * [Espressif](#espressif)
     * [Silicon Labs](#silicon-labs-1)
     * [XMC](#xmc)
+    * [Vorago](#vorago-1)
 * [Architecture support crates](#architecture-support-crates)
     * [ARM](#arm)
     * [RISC-V](#risc-v)
@@ -53,6 +57,8 @@ This project is developed and maintained by the [Resources team][team].
     * [Arduino](#arduino)
     * [Nordic](#nordic-2)
     * [NXP](#nxp-2)
+    * [Pimoroni](#pimoroni)
+    * [Raspberry Pi](#raspberry-pi)
     * [Sparkfun](#sparkfun)
     * [SeeedStudio](#seeedstudio)
     * [SiFive](#sifive-2)
@@ -61,6 +67,7 @@ This project is developed and maintained by the [Resources team][team].
     * [STMicroelectronics](#stmicroelectronics-2)
     * [Texas Instruments](#texas-instruments-2)
     * [Teensy](#teensy)
+    * [Vorago](#vorago-2)
     * [Special Purpose](#special-purpose)
 * [Component abstraction crates](#component-abstraction-crates)
 * [Driver crates](#driver-crates)
@@ -131,8 +138,8 @@ In 2018 the Rust community created an embedded working group to help drive adopt
 -   [cortex-m semihosting](https://github.com/japaric/cortex-m-semihosting) Semihosting for ARM Cortex-M processors
 -   [bobbin-cli](https://github.com/bobbin-rs/bobbin-cli) A Rust command line tool to simplify embedded development and deployment.
 -   [ferros](https://github.com/auxoncorp/ferros) A Rust-based userland which also adds compile-time assurances to seL4 development.
--   [cargo-flash](https://probe.rs/guide/1_tools/cargo-flash/) A small cargo subcommand to download your binary to your target chip. - ![crates.io](https://img.shields.io/crates/v/cargo-flash.svg)
--   [cargo-embed](https://probe.rs/guide/1_tools/cargo-embed/) A superset of cargo-flash with additional useful features like configuration file support, a RTT terminal or a GDB server. - ![crates.io](https://img.shields.io/crates/v/cargo-embed.svg)
+-   [cargo-flash](https://probe.rs/docs/tools/cargo-flash/) A small cargo subcommand to download your binary to your target chip. - ![crates.io](https://img.shields.io/crates/v/cargo-flash.svg)
+-   [cargo-embed](https://probe.rs/docs/tools/cargo-embed/) A superset of cargo-flash with additional useful features like configuration file support, a RTT terminal or a GDB server. - ![crates.io](https://img.shields.io/crates/v/cargo-embed.svg)
 -   [cargo-hf2](https://github.com/jacobrosenthal/hf2-rs)  A small cargo subcommand to download cargo builds to Microsoft UF2 bootloaders via HID USB . - ![crates.io](https://img.shields.io/crates/v/cargo-hf2.svg)
 -   [uf2](https://github.com/sajattack/uf2conv-rs) Converts binary files to Microsoft's UF2 format for copying over to mass storage device uf2 bootloaders - ![crates.io](https://img.shields.io/crates/v/uf2.svg)
 -   [Knurling Tools](https://knurling.ferrous-systems.com/tools/) are developed by [Ferrous Systems] to ease the development process for building, debugging, and testing embedded Rust systems. These tools include:
@@ -142,6 +149,8 @@ In 2018 the Rust community created an embedded working group to help drive adopt
     - [app-template](https://github.com/knurling-rs/app-template), a `cargo-generate` powered project template for quickly setting up new projects using the Knurling Tools.
     - [defmt-test](https://github.com/knurling-rs/defmt-test), an embedded test harness that lets you write and run unit tests as if you were using the built-in `#[test]` attribute, but will run on an embedded target
 - [embedded-hal-compat](https://github.com/ryankurte/embedded-hal-compat), a compatibility layer to provide interoperability between `v0.2.x` and `v1.x.x` hal implementations and drivers
+- [Embassy start](https://github.com/titanclass/embassy-start) is a GitHub repo template for setting up async embedded Rust projects that use [Embassy](https://github.com/embassy-rs/embassy). This particular template targets nRF hardware and networking using the Uarte for the purposes of illustration only.
+
 
 [embedded-hal-mock]: https://crates.io/crates/embedded-hal-mock
 
@@ -153,10 +162,11 @@ In 2018 the Rust community created an embedded working group to help drive adopt
 -   [FreeRTOS.rs](https://github.com/hashmismatch/freertos.rs) Rust interface for the FreeRTOS API
 -   [FreeRTOS-rust](https://github.com/lobaro/FreeRTOS-rust) Rust interface for FreeRTOS with Rust entry point and build support crate.
 -   [Tock](https://www.tockos.org) An embedded operating system designed for running multiple concurrent, mutually distrustful applications on low-memory and low-power microcontrollers
+-   [Hubris](https://github.com/oxidecomputer/hubris) A real-time operating systems built by Oxide Computer to run the Service Controller processor in the mainboards of their rack-mount servers.
 
 ### Real-time tools
 
--   [RTIC v0.5](https://rtic.rs/0.5/book/en/) Real-Time Interrupt-driven Concurrency — A concurrency framework for building real time systems:
+-   [RTIC v1.0](https://rtic.rs/1.0/book/en/) Real-Time Interrupt-driven Concurrency — A concurrency framework for building real time systems:
     -   [cortex-m rtic](https://github.com/rtic-rs/cortex-m-rtic) RTIC framework for ARM Cortex-M microcontrollers
     -   [msp430 rtfm](https://github.com/japaric/msp430-rtfm) RTFM framework for MSP430 MCUs
 
@@ -206,6 +216,9 @@ Peripheral Access Crates were also called Device Crates.
 - [`imxrt-ral`](https://github.com/imxrt-rs/imxrt-rs) Register access layer for i.MX RT series. -  ![crates.io](https://img.shields.io/crates/v/imxrt-ral.svg)
 - [`SKEAZN642`](https://crates.io/crates/SKEAZN642) Peripheral access API for KEA64 family microcontrollers (generated using svd2rust) - ![crates.io](https://img.shields.io/crates/v/SKEAZN642.svg)
 
+### Raspberry Pi Silicon
+
+- [`rp2040-pac`](https://crates.io/crates/rp2040-pac) - Peripheral access API for the RP2040 dual-core system-on-chip (generated using svd2rust) - ![crates.io](https://img.shields.io/crates/v/rp2040-pac.svg)
 
 ### SiFive
 
@@ -268,6 +281,11 @@ Peripheral access crates for the different XMC4xxx families of microcontrollers
 - [`xmc4700`](https://github.com/xmc-rs/xmc4700) - ![crates.io](https://img.shields.io/crates/v/xmc4700.svg)
 - [`xmc4800`](https://github.com/xmc-rs/xmc4800) - ![crates.io](https://img.shields.io/crates/v/xmc4800.svg)
 
+### Vorago
+
+- [`va108xx`](https://egit.irs.uni-stuttgart.de/rust/va108xx) - ![crates.io](https://img.shields.io/crates/v/va108xx.svg)
+- [`va416xx`](https://egit.irs.uni-stuttgart.de/rust/va416xx) - ![crates.io](https://img.shields.io/crates/v/va416xx.svg)
+
 ## HAL implementation crates
 
 Implementations of [`embedded-hal`] for microcontroller families and systems running some OS. - ![crates.io](https://img.shields.io/crates/v/embedded-hal.svg)
@@ -318,6 +336,9 @@ Also check the list of [NXP board support crates][nxp-bsc]!
 - [`mkw41z-hal`](https://crates.io/crates/mkw41z-hal) - ![crates.io](https://img.shields.io/crates/v/mkw41z-hal.svg)
 - [`imxrt-hal`](https://github.com/imxrt-rs/imxrt-rs) - HAL for i.MX RT series. -  ![crates.io](https://img.shields.io/crates/v/imxrt-hal.svg)
 
+### Raspberry Pi Silicon
+
+- [`rp2040-hal`](https://crates.io/crates/rp2040-hal) - HAL for the RP2040 dual-core system-on-chip - ![crates.io](https://img.shields.io/crates/v/rp2040-hal.svg)
 
 ### SiFive
 
@@ -362,7 +383,7 @@ Also check the list of [STMicroelectronics board support crates][stm-bsc]!
 
 ### Texas Instruments
 
-- [`tm4c123x-hal`](https://github.com/thejpster/tm4c123x-hal)
+- [`tm4c123x-hal`](https://github.com/rust-embedded-community/tm4c-hal/)
 
 ### MSP430
 
@@ -389,12 +410,17 @@ Also check the list of [STMicroelectronics board support crates][stm-bsc]!
 
 ### GigaDevice
 
-- [`gd32vf103xx-hal`](https://github.com/riscv-rust/gd32vf103xx-hal) - ![cratex.io](https://img.shields.io/crates/v/gd32vf103xx-hal.svg)
+- [`gd32vf103xx-hal`](https://github.com/riscv-rust/gd32vf103xx-hal) - ![crates.io](https://img.shields.io/crates/v/gd32vf103xx-hal.svg)
   - HAL for GD32VF103xx microcontrollers
 - [`gd32vf103-hal`](https://github.com/luojia65/gd32vf103-hal) - ![crates.io](https://img.shields.io/crates/v/gd32vf103-hal.svg)
   - (WIP) Hardware abstract layer (HAL) for the GD32VF103 RISC-V microcontroller
 - [`gd32f1x0-hal`](https://crates.io/crates/gd32f1x0-hal) - ![crates.io](https://img.shields.io/crates/v/gd32f1x0-hal.svg)
   - HAL implementation for GD32F1x0 microcontrollers
+
+### Vorago
+
+- [`va108xx-hal`](https://egit.irs.uni-stuttgart.de/rust/va108xx-hal) - ![crates.io](https://img.shields.io/crates/v/va108xx-hal.svg)
+  - [Blogpost](https://robamu.github.io/post/rust-ecosystem/)
 
 ## Architecture support crates
 
@@ -456,6 +482,17 @@ Crates tailored for specific boards.
  ![crates.io](https://img.shields.io/crates/v/itsybitsy_m4.svg)
 - [`trinket_m0`](https://crates.io/crates/trinket_m0) - Board support for the [Trinket M0 board](https://www.adafruit.com/product/3500)
  ![crates.io](https://img.shields.io/crates/v/trinket_m0.svg)
+- [`adafruit-feather-rp2040`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the [Adafruit Feather RP2040].
+- [`adafruit-itsy-bitsy-rp2040`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the [Adafruit ItsyBitsy RP2040].
+- [`adafruit-kb2040`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the [Adafruit KB2040].
+- [`adafruit-macropad`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the [Adafruit Macropad].
+- [`adafruit-qt-py-rp2040`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the [Adafruit QT Py RP2040].
+
+[Adafruit Feather RP2040]: https://www.adafruit.com/product/4884
+[Adafruit ItsyBitsy RP2040]: https://www.adafruit.com/product/4888
+[Adafruit KB2040]: https://www.adafruit.com/product/5302
+[Adafruit Macropad]: https://www.adafruit.com/product/5128
+[Adafruit QT Py RP2040]: https://www.adafruit.com/product/4900
 
 ### Arduino
 
@@ -468,10 +505,12 @@ Crates tailored for specific boards.
 
 - [`dwm1001`](https://crates.io/crates/dwm1001) - [Decawave DWM1001-DEV] - ![crates.io](https://img.shields.io/crates/v/dwm1001.svg)
 - [`microbit`](https://crates.io/crates/microbit) - [micro:bit] - ![crates.io](https://img.shields.io/crates/v/microbit.svg)
+- [`nrf52840-dk-bsp`](https://crates.io/crates/nrf52840-dk-bsp) - [nrf52840-dk] - ![crates.io](https://img.shields.io/crates/v/nrf52840-dk-bsp.svg)
 - [`Thingy:91-nrf9160`](https://crates.io/crates/thingy-91-nrf9160-bsp) - [thingy:91] - ![crates.io](https://img.shields.io/crates/v/thingy-91-nrf9160-bsp.svg)
 
 [Decawave DWM1001-DEV]: https://www.decawave.com/product/dwm1001-development-board/
 [micro:bit]: http://microbit.org/
+[nrf52840-dk]: https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dk
 [thingy:91]: https://www.nordicsemi.com/Products/Development-hardware/Nordic-Thingy-91
 
 ### NXP
@@ -480,9 +519,24 @@ Crates tailored for specific boards.
 
 [FRDM-KW41Z]: https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/kinetis-cortex-m-mcus/w-serieswireless-conn.m0-plus-m4/freedom-development-kit-for-kinetis-kw41z-31z-21z-mcus:FRDM-KW41Z
 
+### Pimoroni
+
+- [`pimoroni-pico-explorer`](https://github.com/rp-rs/rp-hal) - Board Support for the [Pimoroni Pico Explorer]
+- [`pimoroni-pico-lipo-16mb`](https://github.com/rp-rs/rp-hal) - Board Support for the [Pimoroni Pico Lipo 16MB]
+
+[pimoroni-pico-explorer]: https://github.com/rp-rs/rp-hal/tree/main/boards/pimoroni-pico-explorer
+[Pimoroni Pico Explorer]: https://shop.pimoroni.com/products/pico-explorer-base
+[pimoroni-pico-lipo-16mb]: https://github.com/rp-rs/rp-hal/tree/main/boards/pimoroni_pico_lipo_16mb
+[Pimoroni Pico Lipo 16MB]: https://shop.pimoroni.com/products/pimoroni-pico-lipo?variant=39335427080275
+
+### Raspberry Pi
+
+- [`rp-pico`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the RP2040 based Raspberry Pi Pico.
+
 ### Sparkfun
 
 - [`samd21_mini`](https://crates.io/crates/samd21_mini) - Board support for the [SAMD21 Mini Breakout](https://www.sparkfun.com/products/13664) ![crates.io](https://img.shields.io/crates/v/samd21_mini.svg)
+- [`sparkfun-pro-micro-rp2040`](https://github.com/rp-rs/rp-hal) - Board Support Crate for the RP2040 based Sparkfun Pro Micro.
 
 ### SeeedStudio
 
@@ -521,6 +575,11 @@ Crates tailored for specific boards.
 
 ### Teensy
 - [`teensy4-rs`](https://github.com/mciantyre/teensy4-rs) Board Support create for the [Teensy 4.0]
+
+### Vorago
+
+- [`vorago-reb1`](https://egit.irs.uni-stuttgart.de/rust/vorago-reb1) - ![crates.io](https://img.shields.io/crates/v/vorago-reb1.svg)
+  - [Blogpost](https://robamu.github.io/post/rust-ecosystem/)
 
 ### Texas Instruments
 
@@ -586,12 +645,14 @@ have achieved the "released" status (published on crates.io + documentation / sh
 1. [L3GD20] - SPI - Gyroscope - [Intro blog post][1&2] - ![crates.io](https://img.shields.io/crates/v/l3gd20.svg)
 1. [LSM303DLHC] - I2C - Accelerometer + compass (magnetometer) - [Intro blog post][1&2] - ![crates.io](https://img.shields.io/crates/v/lsm303dlhc.svg)
 1. [MAX6955] - I2C - Driver for Alphanumeric LED display driver - [Intro blog post][46] - ![crates.io](https://img.shields.io/crates/v/max6955.svg)
+1. [MAX116xx-10bit] - SPI - Driver for the MAX11619-MAX11621, MAX11624 and MAX11625 10-bit ADCs - [Intro blog post][59] - ![crates.io](https://img.shields.io/crates/v/max116xx-10bit.svg)
 1. [MCP25LCXX] - SPI - Driver for Microchip's 25LC series of EEPROMs - ![crates.io](https://img.shields.io/crates/v/microchip-eeprom-25lcxx.svg)
 1. [MCP3008] - SPI - 8 channel 10-bit ADC - [Intro blog post][3] - ![crates.io](https://img.shields.io/crates/v/adc-mcp3008.svg)
 1. [MCP3425] - I2C - 16-bit ADC - [Intro blog post][5] - ![crates.io](https://img.shields.io/crates/v/mcp3425.svg)
 1. [MCP794xx] - I2C - Real-time clock / calendar driver - [Intro blog post][26] - ![crates.io](https://img.shields.io/crates/v/mcp794xx.svg)
 1. [MMA7660FC] - I2C - 3-axis accelerometer - [Intro blog post][9]
 1. [OPT300x] - I2C - Ambient light sensor family driver  - [Intro blog post][30] - ![crates.io](https://img.shields.io/crates/v/opt300x.svg)
+1. [port-expander] - I2C - Driver for I2C port expanders (supports `PCA95xx`, `PCF85xx`) - [Intro blog post][58] - ![crates.io](https://img.shields.io/crates/v/port-expander.svg)
 1. [pwm-pca9685] - I2C - 16-channel, 12-bit PWM/Servo/LED controller - [Intro blog post][32] - ![crates.io](https://img.shields.io/crates/v/pwm-pca9685.svg)
 1. [rainbow-hat-rs] - I2C/SPI/GPIO - Pimoroni Rainbow HAT driver for Raspberry Pi - [github][57] - ![crates.io](https://img.shields.io/crates/v/rainbow-hat-rs.svg)
 1. [rotary-encoder-hal] - GPIO - A rotary encoder driver using `embedded-hal` - [Intro blog post][28] - ![crates.io](https://img.shields.io/crates/v/rotary-encoder-hal.svg)
@@ -678,6 +739,8 @@ have achieved the "released" status (published on crates.io + documentation / sh
 [55]: https://barafael.github.io/A-Platform-Agnostic-Driver-for-the-CD74HC4067
 [56]: https://barafael.github.io/A-Platform-Agnostic-Driver-for-the-HC12-serial-radio-module/
 [57]: https://github.com/yannart/rainbow-hat-rs
+[58]: https://blog.rahix.de/port-expander/
+[59]: https://robamu.github.io/post/max11619-driver-rust/
 
 [AD983x]: https://crates.io/crates/ad983x
 [adafruit-alphanum4]: https://crates.io/crates/adafruit-alphanum4
@@ -705,12 +768,14 @@ have achieved the "released" status (published on crates.io + documentation / sh
 [L3GD20]: https://crates.io/crates/l3gd20
 [LSM303DLHC]: https://crates.io/crates/lsm303dlhc
 [MAX6955]: https://crates.io/crates/max6955
+[MAX116xx-10bit]: https://crates.io/crates/max116xx-10bit
 [MCP25LCXX]: https://crates.io/crates/microchip-eeprom-25lcxx
 [MCP3008]: https://crates.io/crates/adc-mcp3008
 [MCP3425]: https://crates.io/crates/mcp3425
 [MCP794xx]: https://crates.io/crates/mcp794xx
 [MMA7660FC]: https://crates.io/crates/mma7660fc
 [OPT300x]: https://github.com/eldruin/opt300x-rs
+[port-expander]: https://crates.io/crates/port-expander
 [pwm-pca9685]: https://crates.io/crates/pwm-pca9685
 [rainbow-hat-rs]: https://crates.io/crates/rainbow-hat-rs
 [rotary-encoder-hal]: https://crates.io/crates/rotary-encoder-hal
